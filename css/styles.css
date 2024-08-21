@@ -21,11 +21,11 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./img/bg.PNG');
+    background-image: url('/img/bg.PNG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* Certifique-se de que o fundo fique atrás de todo o resto */
+    z-index: -1;
 }
 
 
