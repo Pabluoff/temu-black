@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roleta de Cupons</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
+    <title>Roleta</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <div class="wheel-container">
-        <div class="arrow"></div>
-        <div class="wheel">
-            <div class="segment" style="--i: 0;">
-                <span class="text">R$5</span>
+    <div id="fundo"></div>
+
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>    
+    <div class="roleta-container">
+        <div id="overlay" class="overlay"></div>
+        <div class="seta-container">
+            <img src="img/seta.PNG" alt="Seta" class="seta">
+        </div>
+        <div id="roleta" class="roleta">
+            <div class="secao" data-valor="R$5">
+                <div class="secao-texto"><span style="font-size: 22px;">R$</span>50</div>
             </div>
-            <div class="segment" style="--i: 1;">
-                <span class="text">R$200</span>
+            <div class="secao" data-valor="R$200">
+                <div class="secao-texto" style="color: white;"><span style="font-size: 22px;">R$</span>200</div>
             </div>
-            <div class="segment" style="--i: 2;">
-                <span class="text">Mais 1</span>
+            <div class="secao" data-valor="R$10">
+                <div class="secao-texto"><span style="font-size: 22px;">R$</span>10</div>
             </div>
-            <div class="segment" style="--i: 3;">
-                <span class="text">R$10</span>
+            <div id="secaoMais1" class="secao" data-valor="Mais 1">
+                <div class="secao-texto" style="color: white;">3 itens</div>
             </div>
         </div>
-        <button id="spin-button">Parar</button>
-    </div>
-    <script src="./js/script.js"></script>
+        <div id="circuloParar" class="circulo-parar">Parar</div>
+        <button id="botaoParar">Parar</button>
+        <h2 id="melhorPremioTexto" class="melhor-premio" style="display: none;">Obteve o melhor prêmio!</h2>
+        <img id="premioImagem" src="img/premiação.PNG" alt="Prêmio" class="premio-imagem">
+        <a id="btnResgatar" class="btn-resgatar">Resgatar prêmios</a>
+        <img id="maoImagem" src="img/hand click.PNG" alt="Mão indicando" class="mao-indicando">
+    </div>        
+    <div id="confetti"></div>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
