@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roleta de Cupons</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <div class="wheel-container">
+        <div class="arrow"></div>
         <div class="wheel">
-            <div class="segment" style="--i: 0;">R$5</div>
-            <div class="segment" style="--i: 1;">R$200</div>
-            <div class="segment" style="--i: 2;">Mais 1</div>
-            <div class="segment" style="--i: 3;">R$10</div>
-            <div class="center-circle">GIRAR</div>
+            <div class="segment" style="--i: 0;">
+                <span class="text">R$5</span>
+            </div>
+            <div class="segment" style="--i: 1;">
+                <span class="text">R$200</span>
+            </div>
+            <div class="segment" style="--i: 2;">
+                <span class="text">Mais 1</span>
+            </div>
+            <div class="segment" style="--i: 3;">
+                <span class="text">R$10</span>
+            </div>
         </div>
         <button id="spin-button">Parar</button>
     </div>
-    <script src="/js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
