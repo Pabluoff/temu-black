@@ -5,8 +5,9 @@ const premioImagem = document.getElementById("premioImagem");
 
 let anguloAtual = 0;
 let girando = true;
-let velocidade = 10; // Velocidade inicial alta
+let velocidade = 10; // Velocidade inicial mais baixa
 let desacelerando = false;
+let alvoFinal = 0;
 
 function girarRoleta() {
     if (girando) {
@@ -14,13 +15,18 @@ function girarRoleta() {
         roleta.style.transform = `rotate(${anguloAtual}deg)`;
 
         if (desacelerando) {
-            // Desaceleração exponencial
-            velocidade *= 0.97; // Reduz a velocidade exponencialmente
+            // Desaceleração suave e lenta
+            velocidade -= 0.05; // Reduz a velocidade de forma ainda mais gradual
 
-            // Verifica se a roleta está suficientemente desacelerada para parar
-            if (velocidade < 0.2) {
+            if (velocidade <= 0.1) {
+                velocidade = 0.1; // Limite de velocidade mínima para um efeito suave
+            }
+
+            // Verifica se a roleta deve parar no alvo
+            if (anguloAtual >= alvoFinal) {
                 girando = false;
-                pararNaSecao();
+                roleta.style.transform = `rotate(${alvoFinal}deg)`;
+                setTimeout(ganharPremio, 1000); // Exibe o prêmio com um pequeno atraso
             }
         }
 
@@ -32,24 +38,24 @@ function pararRoleta() {
     desacelerando = true;
     botaoParar.disabled = true;
     circuloParar.removeEventListener("click", pararRoleta);
+
+    // Calcula o alvo final baseado na seção desejada
+    const secaoDesejada = 150; // Ângulo da seção "secaoMais1"
+    const voltasExtras = 1080; // Mais voltas extras (1440° = 4 voltas) para desaceleração mais longa
+    const ajusteFinal = (secaoDesejada - (anguloAtual % 360)) % 360;
+    alvoFinal = anguloAtual + ajusteFinal + voltasExtras;
 }
 
-function pararNaSecao() {
-    const grausPorSecao = 90;
-    const secaoMais1Angulo = 230; // Posição da seção "secaoMais1"
-    
-    // Calcular a quantidade de rotação necessária para parar exatamente na seção desejada
-    let ajuste = (secaoMais1Angulo - (anguloAtual % 360)) % 360;
-    if (ajuste < 0) ajuste += 360;
-
-    // Adicionar rotação para suavizar o ajuste final
-    const anguloFinal = anguloAtual + ajuste + grausPorSecao * 3; // Três voltas para garantir desaceleração
-    roleta.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
-    roleta.style.transform = `rotate(${anguloFinal}deg)`;
-    
-    // Após a transição, exibir o prêmio
-    setTimeout(ganharPremio, 4000);
+function ganharPremio() {
+    // Lógica para exibir o prêmio
+    premioImagem.style.display = "block";
 }
+
+// Inicializa o giro contínuo
+requestAnimationFrame(girarRoleta);
+
+// Evento de clique para parar a roleta
+circuloParar.addEventListener("click", pararRoleta);
 function criarConfetti() {
     const confettiContainer = document.getElementById("confetti");
     const cores = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#FFA500"];
