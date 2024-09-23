@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promoção 3 Itens</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff3e0;
+        }
+
+        .header {
+            background-color: #fdd835;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .offer-banner {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 15px;
+            font-size: 38px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer {
+            text-align: center;
+            font-size: 22px;
+            color: #000;
+            margin-top: 20px;
+        }
+
+        .timer span {
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 10px;
+            margin: 0 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fdd835;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .header {
+            background-color: #fdd835;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .timer.fixed-header {
+            transition: all 0.3s ease;
+        }
+
+        .discount-text {
+            text-align: center;
+            font-size: 16px;
+            color: #ff6f00;
+            margin: 15px 60px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 3px;
+        }
+
+        .product button {
+            background-color: #ff5722;
+            border: none;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .product button.disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .footer .savings {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .footer .savings ion-icon {
+            font-size: 26px;
+            margin-right: 10px;
+            color: #388e3c;
+        }
+
+        .footer .savings span {
+            color: #388e3c;
+            font-weight: bold;
+        }
+
+        .footer button {
+            background-color: gray;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: not-allowed;
+            transition: background-color 0.3s;
+        }
+
+        .footer button.active {
+            background-color: #ff5722;
+            cursor: pointer;
+        }
+
+        .footer button.active:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        Ofertas Ilimitadas
+    </div>
+
+    <div class="offer-banner">
+        3 ITENS <br> <span style="font-size: 17px;">PACK DE CUPOM</span>
+    </div>
+    <div class="timer" id="timer">
+        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>
+
+    <div class="discount-text">
+        Confira agora para aproveitar <strong>SEU PRESENTE</strong> em 3 itens
+    </div>
+
+    <div class="product-grid">
+        <div class="product">
+            <img src="/img/Conjunto De Panelas 12 Peças Inoxidável.jpeg" alt="Mop">
+            <p>Conjunto De Panelas 12 Peças</p>
+            <p><strong>R$00,00</strong> <del>R$543,29</del></p>
+            <button onclick="selectItem(this, 543.29)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Fritadeira Air Fryer Britânia 3L.jpeg" alt="Pincéis de Confeitar">
+            <p>Fritadeira Air Fryer Britânia 3L</p>
+            <p><strong>R$00,00</strong> <del>R$153,49</del></p>
+            <button onclick="selectItem(this, 153.49)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Edredom Acolchoado Casal.jpeg" alt="Tapete de banheiro">
+            <p>Edredom Acolchoado Casal</p>
+            <p><strong>R$00,00</strong> <del>R$179,99</del></p>
+            <button onclick="selectItem(this, 179.99)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Conjunto De Garrafa Térmica Cinza.jpeg" alt="Cesto de roupas">
+            <p>Conjunto De Garrafa Térmica</p>
+            <p><strong>R$00,00</strong> <del>R$90,00</del></p>
+            <button onclick="selectItem(this, 90.00)">Escolha</button>
+        </div>
+        <!-- Novos produtos adicionados -->
+        <div class="product">
+            <img src="/img/Talhares Para Festa 36pcs.jpeg" alt="Chaleira Elétrica">
+            <p>Talhares Para Festa 36pcs</p>
+            <p><strong>R$00,00</strong> <del>R$78,00</del></p>
+            <button onclick="selectItem(this, 78.00)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/panela-de-pressao.jpg" alt="Panela de Pressão">
+            <p>Panela de Pressão Panelux 4,5L Prata Fechamento Externo Magnific</p>
+            <p><strong>R$00,00</strong> <del>R$136,89</del></p>
+            <button onclick="selectItem(this, 136.89)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Arma Automática Lança Gel.jpeg" alt="Conjunto de Talheres">
+            <p>Arma Automática Lança Gel</p>
+            <p><strong>R$00,00</strong> <del>R$375,99</del></p>
+            <button onclick="selectItem(this, 375.99)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Caixa De Som Com Carregamento.jpeg" alt="Abajur Moderno">
+            <p>Caixa de Som c/ Carregamento</p>
+            <p><strong>R$00,00</strong> <del>R$110,00</del></p>
+            <button onclick="selectItem(this, 110.00)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Umidificador Chama Led 7 Cores.jpeg" alt="Caixa de Som Bluetooth">
+            <p>Umidificador Chama c/ 7 Cores</p>
+            <p><strong>R$00,00</strong> <del>R$77,98</del></p>
+            <button onclick="selectItem(this, 77.98)">Escolha</button>
+        </div>
+        <div class="product">
+            <img src="/img/Lâmpada Lunar.jpeg" alt="Aspirador de Pó">
+            <p>Lâmpada Lunar c/ Suporte e RGB</p>
+            <p><strong>R$00,00</strong> <del>R$67,00</del></p>
+            <button onclick="selectItem(this, 67.00)">Escolha</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="savings">
+            <ion-icon name="pricetag-outline"></ion-icon>
+            <span>Economizou R$0,00</span>
+        </div>
+        <button id="finalizeButton">Selecione pelo menos 3 itens</button>
+    </div>
+
+    <script>
+        let selectedCount = 0;
+        let totalSavings = 0;
+
+        function selectItem(button, originalPrice) {
+            if (button.textContent === "Escolha") {
+                if (selectedCount < 3) {
+                    button.textContent = "No Carrinho";
+                    selectedCount++;
+                    totalSavings += originalPrice;
+                }
+            } else {
+                button.textContent = "Escolha";
+                selectedCount--;
+                totalSavings -= originalPrice;
+            }
+
+            // Atualizar economia
+            document.querySelector('.footer .savings span').textContent = `Economizou R$${totalSavings.toFixed(2)}`;
+
+            // Atualizar botão de finalizar compra
+            const finalizeButton = document.getElementById('finalizeButton');
+            if (selectedCount >= 3) {
+                finalizeButton.classList.add('active');
+                finalizeButton.disabled = false;
+                finalizeButton.textContent = "FINALIZAR COMPRA";
+                finalizeButton.onclick = function () {
+                    window.location.href = "https://www.exemplo.com/finalizar-compra"; // Substitua pelo seu link
+                };
+                disableOtherButtons(true);
+            } else {
+                finalizeButton.classList.remove('active');
+                finalizeButton.disabled = true;
+                finalizeButton.textContent = "Selecione pelo menos 3 itens";
+                finalizeButton.onclick = null; // Remove o redirecionamento
+                disableOtherButtons(false);
+            }
+        }
+
+        function disableOtherButtons(disable) {
+            const buttons = document.querySelectorAll('.product button');
+            buttons.forEach(button => {
+                if (button.textContent === "Escolha") {
+                    button.disabled = disable;
+                    button.style.backgroundColor = disable ? 'gray' : '#ff5722';
+                    button.style.cursor = disable ? 'not-allowed' : 'pointer';
+                }
+            });
+        }
+
+        // Definindo o tempo inicial de 15 minutos (900 segundos)
+        let timeRemaining = 900;
+        let countdown;
+
+        // Verifica se há tempo restante salvo no localStorage
+        let savedTime = localStorage.getItem('remainingTime');
+        if (savedTime) {
+            timeRemaining = parseInt(savedTime);
+        } else {
+            timeRemaining = 900; // Tempo inicial de 15 minutos (900 segundos)
+            localStorage.setItem('remainingTime', timeRemaining);
+        }
+
+        // Função para atualizar o timer na página
+        function updateTimer() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                localStorage.setItem('remainingTime', timeRemaining);
+            } else {
+                clearInterval(countdown);
+                localStorage.setItem('remainingTime', 0); // Salva 0 no localStorage
+                timeRemaining = 0; // Mantém o tempo zerado
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00"; // Atualiza o display para 00:00
+            }
+        }
+
+        // Inicializa o timer e o atualiza a cada segundo
+        function startTimer() {
+            updateTimer();
+            countdown = setInterval(updateTimer, 1000);
+        }
+
+        // Verifica se o tempo é 0 ao carregar a página
+        if (savedTime === "0") {
+            timeRemaining = 0;
+            document.getElementById('minutes').textContent = "00";
+            document.getElementById('seconds').textContent = "00";
+        }
+
+        startTimer();
+
+        // Mantém o header fixo quando o usuário rolar a página
+        window.onscroll = function () {
+            const header = document.querySelector('.header');
+            const timer = document.querySelector('.timer');
+            if (window.pageYOffset > 360) {
+                header.classList.add('fixed-header');
+                timer.classList.add('fixed-header');
+            } else {
+                header.classList.remove('fixed-header');
+                timer.classList.remove('fixed-header');
+            }
+        };
+    </script>
+
+</body>
+
+</html>
